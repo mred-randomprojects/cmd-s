@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>cmd-s demo</title>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; font: 16px system-ui, sans-serif; background: #0b0b0d; color: #ddd; }
+    body.light { background: #f6f6f4; color: #222; }
+    main { text-align: center; line-height: 1.7; }
+    kbd { padding: 2px 6px; border-radius: 4px; background: #333; color: #fff; font: 13px ui-monospace, monospace; }
+    button { margin: 4px; padding: 6px 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>Press <kbd>⌘S</kbd> / <kbd>Ctrl+S</kbd>.</p>
+    <button id="toggle">Toggle light / dark</button>
+    <button id="top">Toast at the top</button>
+    <button id="long">A longer message</button>
+  </main>
+  <script type="module">
+    import { interceptSave, showToast } from "./dist/cmd-s.js";
+    interceptSave({ onSave: () => "Guardado" });
+    document.getElementById("toggle").onclick = () => document.body.classList.toggle("light");
+    document.getElementById("top").onclick = () => showToast("Saved", { position: "top" });
+    document.getElementById("long").onclick = () => showToast("No se pudo guardar en este navegador. Bajate el backup antes de cerrar la pestaña.", { duration: 4000 });
+  </script>
+</body>
+</html>
