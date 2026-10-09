@@ -17,9 +17,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "rm -rf dist && tsc -p tsconfig.json",
     "test": "tsc -p tsconfig.test.json && node --test .tmp/test-dist/src/*.test.js",
-    "check": "npm test && npm run build && git diff --exit-code -- dist"
+    "check": "npm test && npm run build && git diff --exit-code -- dist && git status --porcelain -- dist | (! grep .)"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
